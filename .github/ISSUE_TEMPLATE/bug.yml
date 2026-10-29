@@ -15,7 +15,7 @@ body:
     id: client
     attributes:
       label: Client
-      options: [Antigravity, ChatGPT · Codex, Claude Code, Qoder, Cursor, Gemini CLI, App itself]
+      options: [Antigravity, ChatGPT · Codex, Claude Code, Qoder, Cursor, App itself]
     validations: { required: true }
   - type: textarea
     id: what

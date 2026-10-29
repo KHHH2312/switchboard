@@ -110,8 +110,9 @@ keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault. No tel
 <div align="center">
 <img src="docs/theme-light.png" alt="Light theme" width="49%">
 <img src="docs/settings.png" alt="Settings" width="49%">
-<img src="docs/panel.png" alt="Account panel hidden — full-width ledger with the Panel tab on the right edge" width="49%">
+<img src="docs/signin.png" alt="Browser sign-in on an empty channel — Sign in with Claude" width="49%">
 <img src="docs/palette.png" alt="Command palette" width="49%">
+<img src="docs/panel.png" alt="Account panel hidden — full-width ledger with the Panel tab on the right edge" width="49%">
 </div>
 
 ## Supported clients
@@ -141,8 +142,12 @@ own client registrations. Scopes requested: `openid`, `cloud-platform`, `userinf
 
 ## Security
 
-- Credentials never leave your machine except to the vendor whose quota/token is being read:
-  Google, OpenAI, Anthropic, Cursor. **No telemetry.**
+- Credentials never leave your machine except to the vendor whose sign-in, quota or token is
+  being used: Google, OpenAI, Anthropic, Cursor, Qoder. **No telemetry.**
+- Browser sign-ins use the provider's own official authorization page. Loopback flows use PKCE
+  and a random `state`; Qoder and Cursor use their device/deep-control polling endpoints. The
+  non-Google flows use the same **public** OAuth client identifiers their CLIs ship — no client
+  secrets are embedded. The Google client remains bring-your-own.
 - Vault: `%APPDATA%\Switchboard\vault.dat`, sealed with Windows DPAPI (current user).
 - The UI runs in a sandboxed renderer; navigation and window-open are denied; IPC rejects any
   frame that isn't the app's own document; file-opening is restricted to registered credential

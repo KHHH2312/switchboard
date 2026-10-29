@@ -30,10 +30,13 @@ reasonable window before publishing.
   from the machine/user name — weaker, and only there for development parity.
 - **Credentials never leave the machine** except to the vendor endpoints needed to refresh a
   token or read quota (Google, OpenAI, Anthropic, Cursor). There is no telemetry.
-- **OAuth loopback**: the sign-in flow binds a random localhost port, uses a random `state`,
-  completes in the system browser and validates `state` before exchanging the code. The OAuth
-  client is bring-your-own (`%APPDATA%\Switchboard\google.json`); no client credentials ship
-  with the build.
+- **Browser sign-in**: every channel opens its provider's official authorization page in the
+  system browser. Antigravity uses Google with a bring-your-own client
+  (`%APPDATA%\Switchboard\google.json`). ChatGPT/Codex, Claude Code, Qoder and Cursor use the
+  same public OAuth client identifiers their official CLIs ship — no client secrets are
+  embedded. Loopback flows bind a random localhost port with PKCE S256 and a random `state`
+  that is verified before the code exchange; Qoder and Cursor poll their official
+  device/deep-control endpoints. Codes and tokens are never written to logs or the page URL.
 - **Copied secrets** are wiped from the clipboard after 30 seconds if unchanged.
 - **Updates** download only from `github.com` / `*.githubusercontent.com` release assets, verify
   the archive against the release's `SHA256SUMS.txt` before extraction, and install through a
