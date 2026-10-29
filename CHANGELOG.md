@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.3.1 — 2026-10-29
+
+- **Release integrity gate.** The build is diffed against the source tree before it can be
+  published: every file in `resources/app` must be byte-identical to its source counterpart
+  and nothing extra may exist, and any stray script (`.bat`, `.cmd`, `.ps1`, `.vbs`, …) anywhere
+  in the build aborts the release.
+- `FILEMANIFEST.txt` ships with the release: SHA-256 and size for every file in the archive, so
+  anyone can diff what they downloaded.
+
 ## 1.3.0 — 2026-10-29
 
 - **Browser sign-in on every channel.** Each client now has its own sign-in button: Google for
