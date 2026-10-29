@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.0 — 2026-10-29
+
+- Auto-rotate: when the live account drops below your threshold, Switchboard switches to the
+  account with the most headroom and restarts the client for you (tray + settings).
+- Tray app: keep running when the window closes, Ctrl+Alt+S to summon it, start-with-Windows,
+  tray menu with auto-rotate and update check.
+- Notifications: low-quota alerts and auto-rotate events as Windows toasts.
+- Usage history: 5-hour trend sparkline per model group in the inspector.
+- One-click updates: download, SHA-256 verify and self-install from the release feed.
+- Vault export for backups; real values only, secrets warning shown.
+
+
 ## 1.1.0 — 2026-10-29
 
 - In-app update check against the public release feed (Settings → Updates; silently on boot).

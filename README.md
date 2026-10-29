@@ -34,19 +34,27 @@ cache auth in memory.
 **Sign in with the Chrome you already use.** The Google flow runs in your system browser with
 PKCE and a loopback listener — the account already signed in there is one click away.
 
+**It rotates for you.** Set a floor — 10% by default — and Switchboard switches to the account
+with the most headroom before the agent stalls, then restarts the client. Runs from the tray
+with Windows notifications; `Ctrl+Alt+S` summons it anywhere.
+
 **One table for six clients.** Antigravity, ChatGPT/Codex, Claude Code, Qoder, Cursor and
-Gemini CLI. Plans (PRO / ULTRA / PLUS / MAX / FREE), last-used, key search, keyboard-first
-(`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault. No telemetry.
+Gemini CLI. Plans (PRO / ULTRA / PLUS / MAX / FREE), 5-hour usage history sparklines, key
+search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault. No telemetry.
 
 ## Features
 
 | | |
 |---|---|
+| **Auto-rotate** | When the live account crosses your quota floor, Switchboard moves to the healthiest account and restarts the client — with a notification. |
+| **Tray + hotkey** | Keep it in the tray, start with Windows, summon with `Ctrl+Alt+S`; auto-rotate keeps working while the window is closed. |
 | **Verified switching** | Credential written, read back, identity-checked, app restarted. Failed switches are reported as failures. |
-| **Live usage** | Google Cloud Code quota, OpenAI `wham/usage`, Anthropic OAuth usage, Cursor dashboard — 5-hour + weekly windows with reset times. |
+| **Live usage** | Google Cloud Code quota, OpenAI `wham/usage`, Anthropic OAuth usage, Cursor dashboard — 5-hour + weekly windows with reset times and a usage trend sparkline. |
 | **Plan aware** | PRO / ULTRA / PLUS / MAX / FREE badges; filters that only show plans you actually have. |
 | **Browser sign-in** | Google OAuth with PKCE in Chrome/Edge; accounts land in the vault with quota ready. |
 | **Antigravity Tools import** | Bring existing accounts in from `~/.antigravity_tools` with one click. |
+| **One-click updates** | In-app check, SHA-256 verified download, self-install and relaunch. |
+| **Backups** | Export the vault to a JSON file when you move machines. |
 | **Private by design** | Vault sealed with Windows DPAPI; renderer sandboxed; navigation denied; IPC frame-gated; clipboard auto-wipes copied credentials; no telemetry. |
 | **Instrument-panel UI** | Bodoni Moda + Schibsted Grotesk + JetBrains Mono, segmented LED meters, light/dark/system themes, `prefers-reduced-motion` respected. |
 
@@ -66,10 +74,13 @@ Gemini CLI. Plans (PRO / ULTRA / PLUS / MAX / FREE), last-used, key search, keyb
    Get-FileHash .\Switchboard-*-win32-x64.zip -Algorithm SHA256
    ```
 3. Unzip anywhere and run **Switchboard.exe** (no installer, no admin rights).
-4. Switchboard checks for updates on launch; you can also check from **Settings → Updates**.
+4. Switchboard checks for updates on launch; **Settings → Updates** can download, verify and
+   install a new release in place.
 
-> Builds are portable and currently **unsigned**, so SmartScreen may ask once. The checksum is
-> the trust anchor until code signing lands.
+> Builds are portable and **code-signed with a self-signed development certificate**
+> (`Switchboard-signing.cer` ships in the archive). Windows will still show SmartScreen's
+> "unknown publisher" until an OV/EV certificate is used — the SHA-256 checksum remains the
+> trust anchor.
 
 ## Using it
 
@@ -136,6 +147,9 @@ relaunched around a switch because they rewrite auth on exit. Auto-restart can b
 
 **Is it open source?** This repository distributes the application and its documentation; it
 does not host the application source.
+
+**What if I hit my quota mid-task?** With auto-rotate on, Switchboard switches accounts for you
+and restarts the client; you get a Windows notification either way.
 
 ## Changelog
 
