@@ -57,6 +57,7 @@ search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault
 | **Live usage** | Google Cloud Code quota, OpenAI `wham/usage`, Anthropic OAuth usage, Cursor dashboard — 5-hour + weekly windows with reset times and a usage trend sparkline. |
 | **Plan aware** | PRO / ULTRA / PLUS / MAX / FREE badges; filters that only show plans you actually have. |
 | **Browser sign-in** | Google OAuth with PKCE in Chrome/Edge; accounts land in the vault with quota ready. |
+| **ChatGPT desktop session** | Capture stores the desktop app's own profile beside the Codex account; switching restores it and reopens the app signed in. |
 | **Antigravity Tools import** | Bring existing accounts in from `~/.antigravity_tools` with one click. |
 | **One-click updates** | In-app check, SHA-256 verified download, self-install and relaunch. |
 | **Backups** | Export the vault to a JSON file when you move machines. |
@@ -151,7 +152,13 @@ already keep on disk, encrypted with your Windows user key.
 until the credential reads back with the expected identity.
 
 **Does it work if the client is running?** Yes for most; Qoder and Cursor are closed and
-relaunched around a switch because they rewrite auth on exit. Auto-restart can be disabled.
+relaunched around a switch because they rewrite auth on exit. Capture for ChatGPT/Codex
+briefly closes the desktop app to snapshot its session consistently, then reopens it.
+
+**Does switching also log the ChatGPT desktop app in?** Yes — once you have signed the desktop
+app into that account and captured it (Capture briefly closes and reopens the app), switching
+restores that profile and relaunches the app. The Codex CLI account in `~/.codex/auth.json`
+is switched in the same action.
 
 **Does it need to stay open?** No — keep it in the tray (on by default). Auto-rotate and the
 low-quota notifications keep working with the window closed; `Ctrl+Alt+S` brings it back.

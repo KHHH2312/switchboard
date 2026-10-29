@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.2 — 2026-10-29
+
+- **ChatGPT / Codex desktop sessions**: Capture now also snapshots the desktop app's browser
+  profile (cookies + storage) next to the account, and switching restores it and relaunches the
+  app — so the app opens signed in as the same account as the CLI, not on the sign-in screen.
+- Capture closes the desktop app briefly for a consistent profile copy, then reopens it.
+- Codex switches no longer force a desktop relaunch when no desktop snapshot is stored.
+- UI shows when a desktop session was captured; capture toast explains when it was skipped.
+
 ## 1.2.1 — 2026-10-29
 
 - Single-instance behaviour: launching Switchboard again (desktop shortcut, Start menu, tray)
