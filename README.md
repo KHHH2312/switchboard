@@ -18,8 +18,9 @@ move to the next account in one verified click — no re-login, no browser dance
 
 </div>
 
-> **New in 1.2** — auto-rotate when quota runs low · tray + `Ctrl+Alt+S` · usage-history
-> sparklines · one-click, SHA-256-verified updates · signed builds · vault export.
+> **New in 1.2** — collapsible account panel (`Ctrl+B`) · explicit remove-account with
+> confirmation · signed-in ChatGPT desktop snapshots · auto-rotate when quota runs low ·
+> tray + `Ctrl+Alt+S` · usage-history sparklines · SHA-256-verified one-click updates.
 > [Full changelog →](CHANGELOG.md)
 
 ---
@@ -54,6 +55,7 @@ search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault
 | **Tray + hotkey** | Keep it in the tray, start with Windows, summon with `Ctrl+Alt+S`; auto-rotate keeps working while the window is closed. |
 | **Notifications** | Windows toasts for low quota (30-minute dedupe) and for every automatic rotation. |
 | **Verified switching** | Credential written, read back, identity-checked, app restarted. Failed switches are reported as failures. |
+| **Remove accounts** | Trash on any row, or “Remove this account” in the inspector, behind a confirmation dialog. Deletes the vault entry, captured desktop session and stored profile. |
 | **Live usage** | Google Cloud Code quota, OpenAI `wham/usage`, Anthropic OAuth usage, Cursor dashboard — 5-hour + weekly windows with reset times and a usage trend sparkline. |
 | **Plan aware** | PRO / ULTRA / PLUS / MAX / FREE badges; filters that only show plans you actually have. |
 | **Browser sign-in** | Google OAuth with PKCE in Chrome/Edge; accounts land in the vault with quota ready. |
@@ -98,12 +100,14 @@ search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault
 4. Press the switch — the app writes, verifies, restarts the client if you left auto-restart on.
 5. Leave **auto-rotate** on in Settings and Switchboard will move you to the healthiest account
    before the quota floor hits — the window can be closed, it lives in the tray.
-6. `Ctrl+K` for the command palette; `1`–`6` jumps between clients; `Ctrl+Alt+S` summons the
-   window; the sun icon flips theme.
+6. `Ctrl+K` for the command palette; `1`–`6` jumps between clients; `Ctrl+B` hides the
+   account panel; `Ctrl+Alt+S` summons the window; the sun icon flips theme.
 
 <div align="center">
 <img src="docs/theme-light.png" alt="Light theme" width="49%">
 <img src="docs/settings.png" alt="Settings" width="49%">
+<img src="docs/panel.png" alt="Account panel hidden — full-width ledger with the Panel tab on the right edge" width="49%">
+<img src="docs/palette.png" alt="Command palette" width="49%">
 </div>
 
 ## Supported clients
@@ -138,7 +142,8 @@ Scopes requested: `openid`, `cloud-platform`, `userinfo.email`, `userinfo.profil
 - Vault: `%APPDATA%\Switchboard\vault.dat`, sealed with Windows DPAPI (current user).
 - The UI runs in a sandboxed renderer; navigation and window-open are denied; IPC rejects any
   frame that isn't the app's own document; file-opening is restricted to registered credential
-  stores.
+  stores. The launcher disables Electron's Node runtime entry points (`RunAsNode`,
+  `NODE_OPTIONS`, `--inspect` arguments) before signing.
 - Update checks are the only call outside those vendors: `api.github.com` returns the latest
   release tag; no user data is sent. Installs only proceed after the downloaded archive matches
   the SHA-256 in the release's sums file.

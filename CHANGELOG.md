@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.8 — 2026-10-29
+
+- Hardened the packaged launcher: Electron fuses now disable Node's runtime entry points
+  (`RunAsNode`, `NODE_OPTIONS`, `--inspect` arguments) before the build is signed.
+- `SECURITY.md` rewritten to match what ships: self-signed builds with SHA-256-verified updates,
+  a bring-your-own Google OAuth client, and the remaining portable-build risks.
+
 ## 1.2.7 — 2026-10-29
 
 - The panel toggle stays in sync when clicked rapidly: a slow vault write (~700 ms,

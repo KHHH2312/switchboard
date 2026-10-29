@@ -2,7 +2,7 @@
 
 ## Fonts (SIL Open Font License 1.1)
 
-Bundled woff2 files in `renderer/fonts/`:
+Bundled in the release under `resources/app/renderer/fonts/` (not in this repository):
 
 | Family | Copyright | License file |
 |---|---|---|
@@ -17,4 +17,5 @@ Sources: <https://github.com/google/fonts/tree/main/ofl/bodonimoda>,
 ## Runtime
 
 Electron (MIT) is a build-time/dev dependency only; the portable build bundles the
-Electron runtime as produced by the official distribution.
+Electron runtime as produced by the official distribution. @electron/fuses (MIT) is used
+at build time to harden the launcher and is not bundled.
