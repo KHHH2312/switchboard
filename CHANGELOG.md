@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.7 — 2026-10-29
+
+- The panel toggle stays in sync when clicked rapidly: a slow vault write (~700 ms,
+  DPAPI) can no longer resolve late and revert a newer toggle of the same setting.
+
 ## 1.2.6 — 2026-10-29
 
 - **Hide the account panel**: a panel button in the top bar (or `Ctrl+B`) collapses the inspector
