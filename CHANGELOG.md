@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1 — 2026-10-29
+
+- Single-instance behaviour: launching Switchboard again (desktop shortcut, Start menu, tray)
+  brings the existing window to the front instead of starting a second copy.
+- Desktop shortcut with the Switchboard mark.
+
 ## 1.2.0 — 2026-10-29
 
 **Switchboard now rotates accounts for you, lives in the tray, and updates itself.**
