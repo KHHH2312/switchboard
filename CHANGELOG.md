@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.6 — 2026-10-29
+
+- **Hide the account panel**: a panel button in the top bar (or `Ctrl+B`) collapses the inspector
+  so the account ledger spans the full window. A slim “Panel” tab on the right edge brings it back;
+  the choice persists across launches. Also available from the command palette.
+- Row action buttons no longer clip: the switch and remove controls get the width they need.
+- Fixed the remove button rendering a literal “undefined” instead of its trash glyph.
+
 ## 1.2.5 — 2026-10-29
 
 - Remove-account button is now explicit: a trash control on every account row and a

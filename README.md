@@ -63,6 +63,7 @@ search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault
 | **Backups** | Export the vault to a JSON file when you move machines. |
 | **Private by design** | Vault sealed with Windows DPAPI; renderer sandboxed; navigation denied; IPC frame-gated; clipboard auto-wipes copied credentials; no telemetry. |
 | **Instrument-panel UI** | Bodoni Moda + Schibsted Grotesk + JetBrains Mono, segmented LED meters, light/dark/system themes, `prefers-reduced-motion` respected. |
+| **Collapsible panel** | `Ctrl+B` or the top-bar panel button hides the inspector so the ledger uses the full window; a right-edge tab brings it back. |
 
 ## Requirements
 
