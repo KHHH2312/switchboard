@@ -118,7 +118,7 @@ Scopes requested: `openid`, `cloud-platform`, `userinfo.email`, `userinfo.profil
 - The UI runs in a sandboxed renderer; navigation and window-open are denied; IPC rejects any
   frame that isn't the app's own document; file-opening is restricted to registered credential
   stores.
-- - Update checks are the only call outside those vendors: `api.github.com` returns the latest release tag; no user data is sent.
+- Update checks are the only call outside those vendors: `api.github.com` returns the latest release tag; no user data is sent.
 - Found a flaw? Please use the private channel in [SECURITY.md](SECURITY.md), not a public issue.
 
 ## FAQ
