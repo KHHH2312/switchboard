@@ -1,2 +1,2 @@
-e2509b966165bf24e0b68ae41b32a9f24bc5b1177b0c2b21739d91ad48b2538c *Switchboard-1.2.2-win32-x64.zip
-8e3448122a3e2526add6c0dbd16db10489e1cea4ed53ff3e3a1eeb56ad4ccb4b *Switchboard/Switchboard.exe
+83051c57115ab999cf630e7b38c2ab9340ba8e3df3f6a85019b9f49d8ca677b0 *Switchboard-1.2.3-win32-x64.zip
+22552fa4cec89531927dc02a76bcf76f60103c9d1b2fe2d4a1305a66c4e82e42 *Switchboard/Switchboard.exe

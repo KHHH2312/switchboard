@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.3 — 2026-10-29
+
+- Fixed the ChatGPT desktop relaunch: the launch path was missing a backslash, so the app was
+  never started after a profile restore. Launches now go through IApplicationActivationManager
+  (with an explorer fallback) and are verified by watching for ChatGPT.exe for up to 15 s.
+- Desktop restore reports `relaunched` and any failure explicitly; capture/switch toasts show it.
+
 ## 1.2.2 — 2026-10-29
 
 - **ChatGPT / Codex desktop sessions**: Capture now also snapshots the desktop app's browser
