@@ -18,9 +18,17 @@ move to the next account in one verified click — no re-login, no browser dance
 
 </div>
 
+> **New in 1.2** — auto-rotate when quota runs low · tray + `Ctrl+Alt+S` · usage-history
+> sparklines · one-click, SHA-256-verified updates · signed builds · vault export.
+> [Full changelog →](CHANGELOG.md)
+
 ---
 
 ## Why people keep it pinned
+
+**It rotates for you.** Set a floor — 10% by default — and Switchboard switches to the account
+with the most headroom before the agent stalls, then restarts the client. Runs from the tray
+with Windows notifications; `Ctrl+Alt+S` summons it anywhere.
 
 **Your quota is a countdown, not a mystery.** Five-hour and weekly windows for every model
 group, straight from the vendor's own API, with reset timers — so you switch *before* the
@@ -34,10 +42,6 @@ cache auth in memory.
 **Sign in with the Chrome you already use.** The Google flow runs in your system browser with
 PKCE and a loopback listener — the account already signed in there is one click away.
 
-**It rotates for you.** Set a floor — 10% by default — and Switchboard switches to the account
-with the most headroom before the agent stalls, then restarts the client. Runs from the tray
-with Windows notifications; `Ctrl+Alt+S` summons it anywhere.
-
 **One table for six clients.** Antigravity, ChatGPT/Codex, Claude Code, Qoder, Cursor and
 Gemini CLI. Plans (PRO / ULTRA / PLUS / MAX / FREE), 5-hour usage history sparklines, key
 search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault. No telemetry.
@@ -48,6 +52,7 @@ search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault
 |---|---|
 | **Auto-rotate** | When the live account crosses your quota floor, Switchboard moves to the healthiest account and restarts the client — with a notification. |
 | **Tray + hotkey** | Keep it in the tray, start with Windows, summon with `Ctrl+Alt+S`; auto-rotate keeps working while the window is closed. |
+| **Notifications** | Windows toasts for low quota (30-minute dedupe) and for every automatic rotation. |
 | **Verified switching** | Credential written, read back, identity-checked, app restarted. Failed switches are reported as failures. |
 | **Live usage** | Google Cloud Code quota, OpenAI `wham/usage`, Anthropic OAuth usage, Cursor dashboard — 5-hour + weekly windows with reset times and a usage trend sparkline. |
 | **Plan aware** | PRO / ULTRA / PLUS / MAX / FREE badges; filters that only show plans you actually have. |
@@ -89,7 +94,10 @@ search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault
    signed into right now.
 3. Sign into the other account in that client, capture again.
 4. Press the switch — the app writes, verifies, restarts the client if you left auto-restart on.
-5. `Ctrl+K` for the command palette; `1`–`6` jumps between clients; the sun icon flips theme.
+5. Leave **auto-rotate** on in Settings and Switchboard will move you to the healthiest account
+   before the quota floor hits — the window can be closed, it lives in the tray.
+6. `Ctrl+K` for the command palette; `1`–`6` jumps between clients; `Ctrl+Alt+S` summons the
+   window; the sun icon flips theme.
 
 <div align="center">
 <img src="docs/theme-light.png" alt="Light theme" width="49%">
@@ -129,7 +137,9 @@ Scopes requested: `openid`, `cloud-platform`, `userinfo.email`, `userinfo.profil
 - The UI runs in a sandboxed renderer; navigation and window-open are denied; IPC rejects any
   frame that isn't the app's own document; file-opening is restricted to registered credential
   stores.
-- Update checks are the only call outside those vendors: `api.github.com` returns the latest release tag; no user data is sent.
+- Update checks are the only call outside those vendors: `api.github.com` returns the latest
+  release tag; no user data is sent. Installs only proceed after the downloaded archive matches
+  the SHA-256 in the release's sums file.
 - Found a flaw? Please use the private channel in [SECURITY.md](SECURITY.md), not a public issue.
 
 ## FAQ
@@ -142,6 +152,9 @@ until the credential reads back with the expected identity.
 
 **Does it work if the client is running?** Yes for most; Qoder and Cursor are closed and
 relaunched around a switch because they rewrite auth on exit. Auto-restart can be disabled.
+
+**Does it need to stay open?** No — keep it in the tray (on by default). Auto-rotate and the
+low-quota notifications keep working with the window closed; `Ctrl+Alt+S` brings it back.
 
 **Which Windows versions?** 10 and 11, x64. ARM is not built yet.
 
