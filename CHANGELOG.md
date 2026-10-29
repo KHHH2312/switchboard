@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.4 — 2026-10-29
+
+- **Correct desktop profile**: earlier snapshots targeted a legacy `codex-browser-app` folder that
+  the current app no longer uses. Capture now stores the active Chromium profile's auth-bearing
+  paths (Local State, Cookies, Local/Session Storage, IndexedDB, Service Worker, the
+  `codex-browser-app` partition) and restores exactly those — 7 MB instead of 166 MB.
+- **Signed-in detection**: capture reads the snapshot's cookie jar and reports whether a session
+  cookie was present. The toast and inspector say “signed-in snapshot” or warn that it was
+  captured while signed out, so a useless snapshot can't look successful.
+- Desktop relaunch remains verified via process detection (1.2.3).
+
 ## 1.2.3 — 2026-10-29
 
 - Fixed the ChatGPT desktop relaunch: the launch path was missing a backslash, so the app was

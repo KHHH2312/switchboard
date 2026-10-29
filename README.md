@@ -156,9 +156,10 @@ relaunched around a switch because they rewrite auth on exit. Capture for ChatGP
 briefly closes the desktop app to snapshot its session consistently, then reopens it.
 
 **Does switching also log the ChatGPT desktop app in?** Yes — once you have signed the desktop
-app into that account and captured it (Capture briefly closes and reopens the app), switching
-restores that profile and relaunches the app. The Codex CLI account in `~/.codex/auth.json`
-is switched in the same action.
+app into that account and captured it (Capture briefly closes and reopens the app). Capture now
+reports whether the snapshot contains a session ("signed-in snapshot"); if it says signed-out,
+sign the app in first. Switching restores the active profile and relaunches the app; the Codex
+CLI account in `~/.codex/auth.json` moves in the same action.
 
 **Does it need to stay open?** No — keep it in the tray (on by default). Auto-rotate and the
 low-quota notifications keep working with the window closed; `Ctrl+Alt+S` brings it back.
