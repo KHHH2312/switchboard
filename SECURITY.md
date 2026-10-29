@@ -44,6 +44,11 @@ reasonable window before publishing.
   treats it as an unknown publisher, so the SHA-256 checksum remains the trust anchor.
 - The packaged launcher disables Electron's Node runtime entry points (`RunAsNode`,
   `NODE_OPTIONS` environment variable, `--inspect` arguments) before signing.
+- **Build integrity**: a release cannot be published unless every file in the packaged app is
+  byte-identical to its source counterpart, no extra file exists inside the app folder, and no
+  stray script (`.bat`, `.cmd`, `.ps1`, `.vbs`) is present in the build.
+  `FILEMANIFEST.txt` is published with the release: SHA-256 and size for every archived file, so a
+  downloader can diff the archive against the manifest.
 
 ## Residual risks
 

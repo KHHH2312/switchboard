@@ -86,8 +86,10 @@ keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault. No tel
    ```powershell
    Get-FileHash .\Switchboard-*-win32-x64.zip -Algorithm SHA256
    ```
-3. Unzip anywhere and run **Switchboard.exe** (no installer, no admin rights).
-4. Switchboard checks for updates on launch; **Settings → Updates** can download, verify and
+3. `FILEMANIFEST.txt` (also attached) lists the SHA-256 and size of every file inside the
+   archive — diff it against what you unpacked to see the build line by line.
+4. Unzip anywhere and run **Switchboard.exe** (no installer, no admin rights).
+5. Switchboard checks for updates on launch; **Settings → Updates** can download, verify and
    install a new release in place.
 
 > Builds are portable and **code-signed with a self-signed development certificate**
@@ -156,6 +158,11 @@ own client registrations. Scopes requested: `openid`, `cloud-platform`, `userinf
 - Update checks are the only call outside those vendors: `api.github.com` returns the latest
   release tag; no user data is sent. Installs only proceed after the downloaded archive matches
   the SHA-256 in the release's sums file.
+- **Build integrity gate.** Before a release can be published, the packaged app is diffed against
+  the source tree: every shipped file must be byte-identical to its source, nothing extra may
+  exist inside the app folder, and any stray script (`.bat`, `.cmd`, `.ps1`, `.vbs`, …) anywhere in
+  the build aborts the release. `FILEMANIFEST.txt` ships with the release so anyone can diff the
+  archive file by file.
 - Found a flaw? Please use the private channel in [SECURITY.md](SECURITY.md), not a public issue.
 
 ## FAQ
