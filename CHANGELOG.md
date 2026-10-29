@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.5 — 2026-10-29
+
+- Remove-account button is now explicit: a trash control on every account row and a
+  “Remove this account” button in the inspector, both behind the confirmation dialog.
+  Removal deletes the vault entry, the captured desktop session and the stored profile.
+
 ## 1.2.4 — 2026-10-29
 
 - **Correct desktop profile**: earlier snapshots targeted a legacy `codex-browser-app` folder that
