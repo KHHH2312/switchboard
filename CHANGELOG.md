@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.0 — 2026-10-29
+
+- **Browser sign-in on every channel.** Each client now has its own sign-in button: Google for
+  Antigravity, OpenAI for ChatGPT/Codex, Anthropic for Claude Code, the Qoder device page, and
+  Cursor's deep-control login. Loopback flows use PKCE with state checks; Qoder and Cursor poll
+  their official endpoints. Accounts land in the vault; **Capture current** remains for a
+  session that is already running.
+- **Gemini CLI removed.** Five clients now: Antigravity, ChatGPT/Codex, Claude Code, Qoder,
+  Cursor. The tab set, shortcuts (`1`–`5`), docs and tests follow.
+
 ## 1.2.8 — 2026-10-29
 
 - Hardened the packaged launcher: Electron fuses now disable Node's runtime entry points

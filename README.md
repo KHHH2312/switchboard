@@ -18,9 +18,10 @@ move to the next account in one verified click — no re-login, no browser dance
 
 </div>
 
-> **New in 1.2** — collapsible account panel (`Ctrl+B`) · explicit remove-account with
-> confirmation · signed-in ChatGPT desktop snapshots · auto-rotate when quota runs low ·
-> tray + `Ctrl+Alt+S` · usage-history sparklines · SHA-256-verified one-click updates.
+> **New in 1.3** — browser sign-in on every channel (Google, OpenAI, Anthropic, Qoder,
+> Cursor) · collapsible account panel (`Ctrl+B`) · explicit remove-account with confirmation ·
+> signed-in ChatGPT desktop snapshots · auto-rotate when quota runs low · SHA-256-verified
+> one-click updates.
 > [Full changelog →](CHANGELOG.md)
 
 ---
@@ -40,12 +41,14 @@ compared. If verification fails you get an error, not a silent half-switch. Auto
 relaunches the client on the new account; Qoder and Cursor are closed first because they
 cache auth in memory.
 
-**Sign in with the Chrome you already use.** The Google flow runs in your system browser with
-PKCE and a loopback listener — the account already signed in there is one click away.
+**Sign in on the real web page, not a scripted form.** Every channel has a browser sign-in:
+Google for Antigravity, OpenAI for ChatGPT, Anthropic for Claude, the official device and
+deep-control pages for Qoder and Cursor. Loopback flows use PKCE; the account in your browser
+is one click away.
 
-**One table for six clients.** Antigravity, ChatGPT/Codex, Claude Code, Qoder, Cursor and
-Gemini CLI. Plans (PRO / ULTRA / PLUS / MAX / FREE), 5-hour usage history sparklines, key
-search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault. No telemetry.
+**One table for five clients.** Antigravity, ChatGPT/Codex, Claude Code, Qoder and Cursor.
+Plans (PRO / ULTRA / PLUS / MAX / FREE), 5-hour usage history sparklines, key search,
+keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault. No telemetry.
 
 ## Features
 
@@ -58,7 +61,7 @@ search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault
 | **Remove accounts** | Trash on any row, or “Remove this account” in the inspector, behind a confirmation dialog. Deletes the vault entry, captured desktop session and stored profile. |
 | **Live usage** | Google Cloud Code quota, OpenAI `wham/usage`, Anthropic OAuth usage, Cursor dashboard — 5-hour + weekly windows with reset times and a usage trend sparkline. |
 | **Plan aware** | PRO / ULTRA / PLUS / MAX / FREE badges; filters that only show plans you actually have. |
-| **Browser sign-in** | Google OAuth with PKCE in Chrome/Edge; accounts land in the vault with quota ready. |
+| **Browser sign-in everywhere** | Antigravity signs in with Google; ChatGPT, Claude, Qoder and Cursor use their own official browser flows. PKCE on every loopback flow; accounts land in the vault with usage ready. |
 | **ChatGPT desktop session** | Capture stores the desktop app's own profile beside the Codex account; switching restores it and reopens the app signed in. |
 | **Antigravity Tools import** | Bring existing accounts in from `~/.antigravity_tools` with one click. |
 | **One-click updates** | In-app check, SHA-256 verified download, self-install and relaunch. |
@@ -70,9 +73,10 @@ search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault
 ## Requirements
 
 - Windows 10 or 11, x64
-- The client you want to manage (Antigravity, Codex, Claude Code, Qoder, Cursor, Gemini CLI)
-- Google sign-in (optional) needs your own OAuth desktop client — this project ships none:
-  see [Google sign-in setup](#google-sign-in-setup)
+- The client you want to manage (Antigravity, Codex, Claude Code, Qoder, Cursor)
+- Google sign-in for Antigravity (optional) needs your own OAuth desktop client — this project
+  ships none: see [Google sign-in setup](#google-sign-in-setup). The other browser sign-ins do
+  not need it.
 
 ## Install
 
@@ -94,13 +98,13 @@ search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault
 ## Using it
 
 1. Pick a client in the top bar.
-2. **Sign in with Google** (Antigravity) or **Capture current** to snapshot what the client is
-   signed into right now.
-3. Sign into the other account in that client, capture again.
+2. **Sign in with ...** opens that client's official browser page and adds the account to the
+   vault. **Capture current** still snapshots a session that is already running in the client.
+3. Sign into another account the same way, or in the client and then capture.
 4. Press the switch — the app writes, verifies, restarts the client if you left auto-restart on.
 5. Leave **auto-rotate** on in Settings and Switchboard will move you to the healthiest account
    before the quota floor hits — the window can be closed, it lives in the tray.
-6. `Ctrl+K` for the command palette; `1`–`6` jumps between clients; `Ctrl+B` hides the
+6. `Ctrl+K` for the command palette; `1`–`5` jumps between clients; `Ctrl+B` hides the
    account panel; `Ctrl+Alt+S` summons the window; the sun icon flips theme.
 
 <div align="center">
@@ -119,7 +123,6 @@ search, keyboard-first (`Ctrl+K`), light & dark themes, and a DPAPI-sealed vault
 | Claude Code | `~/.claude/.credentials.json` + `~/.claude.json` | Anthropic OAuth usage |
 | Qoder | `%APPDATA%\com.qoder.app.stable\auth.v1.dat` | — |
 | Cursor | `%APPDATA%\Cursor\User\globalStorage\state.vscdb` | Cursor dashboard service |
-| Gemini CLI | `~/.gemini/oauth_creds.json` + `google_accounts.json` | — |
 
 ## Google sign-in setup
 
@@ -131,9 +134,10 @@ create a *Desktop app* OAuth client in the
 { "client_id": "YOUR_ID.apps.googleusercontent.com", "client_secret": "YOUR_SECRET" }
 ```
 
-into `%APPDATA%\Switchboard\google.json` (create the folder if needed) and restart.
-Scopes requested: `openid`, `cloud-platform`, `userinfo.email`, `userinfo.profile`, `cclog`,
-`experimentsandconfigs` — the same set Antigravity itself uses.
+into `%APPDATA%\Switchboard\google.json` (create the folder if needed) and restart. This is
+only used by the Antigravity button; ChatGPT, Claude, Qoder and Cursor sign in through their
+own client registrations. Scopes requested: `openid`, `cloud-platform`, `userinfo.email`,
+`userinfo.profile`, `cclog`, `experimentsandconfigs` — the same set Antigravity itself uses.
 
 ## Security
 
@@ -185,5 +189,5 @@ See [CHANGELOG.md](CHANGELOG.md).
 ## License
 
 MIT — see [LICENSE](LICENSE). Third-party assets in [THIRD-PARTY.md](THIRD-PARTY.md).
-"Antigravity", "ChatGPT", "Claude", "Cursor", "Qoder" and "Gemini" are trademarks of their
+"Antigravity", "ChatGPT", "Claude", "Cursor" and "Qoder" are trademarks of their
 respective owners; this project is not affiliated with them.
